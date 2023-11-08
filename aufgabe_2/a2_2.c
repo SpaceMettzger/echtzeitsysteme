@@ -1,39 +1,54 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 
 int main(int args, char *argv[]) {
     if (args != 2) {
         // Incorrect number of command-line arguments
-        printf("Usage: %s <int>\n", argv[0]);
-        printf("Description: This program takes an int as an argument and creates x zombie processes based on the number provided.\n");
+        fprintf(stderr,"Usage: %s <int>\n", argv[0]);
+        fprintf(stderr,"Description: This program takes an int as an argument and creates x zombie processes based on the number provided.\n");
         return 1;
     }
 
     int value = atoi(argv[1]);
 
     if (value == 0 && argv[1][0] != '0') {
-        printf("Invalid input: not an integer.\n");
+        fprintf(stderr,"Invalid input: not an integer.\n");
         return 1;
     }
 
-    int forks;
+    int forks = 0;
 
     if (value == -1) {
-        while (1)
+        while ((forks = fork()) != -1)
         {
-            forks = fork();
+            if (forks < 0) {
+                perror("Fork failed");
+                exit(EXIT_FAILURE);
+            } else if (forks == 0) {
+                exit(EXIT_SUCCESS);
+            }
         }
     }
     else {
-        value = value / 2;
-        for (int i = 0; i <= value; i++) {
+        for (int i = 0; i < value; i++) {
             forks = fork();
+            if (forks == -1) {
+                perror("Fork failed");
+                exit(EXIT_FAILURE);
+            } else if (forks == 0) {
+                exit(EXIT_SUCCESS);
+            }
         }
     }
+    getchar();
+    exit(EXIT_SUCCESS);
 
 }
 
 /*
-Jeder Kindprozess bleibt so lange ein Zombieprozess, bis von 
+Ein Kindprozess wird ein Zombieprozess, wenn er beendet wird ohne dass wait(NULL) aufgerufen wird 
 
 #include <sys/wait.h> 
 
