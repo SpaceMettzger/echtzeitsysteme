@@ -1,6 +1,4 @@
-#ifndef PROCESS_H
-#define PROCESS_H
-
+#pragma once
 #include <stdint.h>
 
 
@@ -17,4 +15,3 @@ void p_switch_to_blocked(struct process *p);
 
 void p_print(struct process *p);
 
-#endif

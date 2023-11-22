@@ -5,6 +5,8 @@
 
 extern char **environ;
 
+#define CLEAR "\e[1;1H\e[2J"
+
 
 int check_user_input(char* user_input) {
     int value = atoi(user_input);
@@ -17,7 +19,8 @@ int check_user_input(char* user_input) {
 }
 
 void print_menu(){
-    system("clear"); 
+    printf("%s",CLEAR);
+//system("clear"); 
     puts("---------------------");
     puts("Environment-List Menu");
     puts("---------------------");

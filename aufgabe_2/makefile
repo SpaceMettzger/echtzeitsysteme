@@ -7,6 +7,8 @@ a2_1: a2_1.c
 
 a2_2: a2_2.c 
 
+zombies: zombies.c
+
 a2_3: a2_3.o
 	$(CC) a2_3.c $(CFLAGS) -I/usr/lib/x86_64-linux-gnu -lreadline -o a2_3 
 

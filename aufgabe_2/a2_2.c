@@ -23,13 +23,11 @@ int main(int args, char *argv[]) {
     if (value == -1) {
         while ((forks = fork()) != -1)
         {
-            if (forks < 0) {
-                perror("Fork failed");
-                exit(EXIT_FAILURE);
-            } else if (forks == 0) {
+            if (forks == 0) {
                 exit(EXIT_SUCCESS);
             }
         }
+        exit(EXIT_FAILURE);
     }
     else {
         for (int i = 0; i < value; i++) {

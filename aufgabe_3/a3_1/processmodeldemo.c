@@ -25,7 +25,7 @@ void sig_usr(int signum){
         }
     }
 
-    signal(SIGINT, SIG_DFL);
+    //signal(SIGINT, SIG_DFL);
 }
 
 
