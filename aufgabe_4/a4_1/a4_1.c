@@ -120,7 +120,6 @@ void gen_workers(char **numbers, int pfd[], int n) {
                 perror("write");
                 exit(EXIT_FAILURE);
             }
-            //free(numbers);
             close(pfd[1]); 
             exit(EXIT_SUCCESS);
         }

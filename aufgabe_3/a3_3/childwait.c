@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         } else if (pid == 0) {
             child_pid = getpid();
-            sleep(2);
+            sleep(i+1);
             wait(NULL);
             
             exit(EXIT_SUCCESS);
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
             n++;
             printf("Child %d: started (n=%d)\n", child_pid, n);
             printf("Parent %d: sleep(2)\n", getpid());
-            sleep(2);
+            //sleep(2);
         }
     }
 

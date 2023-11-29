@@ -5,7 +5,7 @@
 
 extern char **environ;
 
-#define CLEAR "\e[1;1H\e[2J"
+#define CLEAR "\033[1;1H\033[2J"
 
 
 int check_user_input(char* user_input) {
@@ -19,7 +19,7 @@ int check_user_input(char* user_input) {
 }
 
 void print_menu(){
-    printf("%s",CLEAR);
+    printf("%s", CLEAR);
     puts("---------------------");
     puts("Environment-List Menu");
     puts("---------------------");
@@ -30,6 +30,12 @@ void print_menu(){
     puts("[5]: Remove environment entry (unsetenv)");
     puts("[0]: End");
     puts("---------------------");
+}
+
+void list_env(char** env_variables) {
+    for (; *env_variables; env_variables++) {
+        printf("%s\n", *env_variables);
+    }   
 }
 
 void get_env() {
@@ -58,8 +64,7 @@ void add_env() {
     } 
     else {
         puts("Invalid input. Please use the format \"VARIABLE_NAME=VALUE\".");
-    }
-    //free(env_var); 
+    } 
 }
 
 void modify_env() {
@@ -99,33 +104,7 @@ while(1) {
     int value = check_user_input(user_input);
     switch (value) {
         case 1: ;
-            char **env_copy = NULL;
-            int num_env = 0;
-            while (env_variables[num_env]) {
-                num_env++;
-            }
-            env_copy = (char **)malloc((num_env + 1) * sizeof(char *));
-            if (env_copy == NULL) {
-                perror("Memory allocation failed");
-                exit(1);
-            }
-            for (int i = 0; i < num_env; i++) {
-                env_copy[i] = strdup(env_variables[i]);
-            }
-            env_copy[num_env] = NULL;
-
-            for (int i = 0; env_copy[i]; i++) {
-                char* var = strchr(env_copy[i], '=');
-                if (var) {
-                    *var = '\0';
-                    printf("%s\n", env_copy[i]);
-                }
-            }
-
-            for (int i = 0; env_copy[i]; i++) {
-                free(env_copy[i]);
-            }
-            free(env_copy);
+            list_env(env_variables);
             puts("Press Enter to Continue\n");  
             getchar();   
             break;
