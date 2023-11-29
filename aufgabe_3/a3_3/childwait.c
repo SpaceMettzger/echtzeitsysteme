@@ -47,7 +47,6 @@ int main(int argc, char *argv[]) {
         } else {
             n++;
             printf("Child %d: started (n=%d)\n", child_pid, n);
-            //printf("Child %d: terminated (n=%d)\n", child_pid, n);
             printf("Parent %d: sleep(2)\n", getpid());
             sleep(2);
         }

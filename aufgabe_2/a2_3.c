@@ -20,7 +20,6 @@ int check_user_input(char* user_input) {
 
 void print_menu(){
     printf("%s",CLEAR);
-//system("clear"); 
     puts("---------------------");
     puts("Environment-List Menu");
     puts("---------------------");
