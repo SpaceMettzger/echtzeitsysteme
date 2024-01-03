@@ -1,0 +1,14 @@
+digraph {
+r1 [shape=box, style=filled, fillcolor="orange"];
+r2 [shape=box, style=filled, fillcolor="orange"];
+r3 [shape=box, style=filled, fillcolor="orange"];
+t1 [style=filled, fillcolor="green"];
+t2 [style=filled, fillcolor="green"];
+t3 [style=filled, fillcolor="green"];
+r1 -> t1;
+r2 -> t2;
+t1 -> r2;
+t2 -> r3;
+t3 -> r1;
+r3 -> t3;
+ }
